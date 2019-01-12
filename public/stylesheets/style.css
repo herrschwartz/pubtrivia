@@ -1,0 +1,103 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #343a40!important;
+}
+
+ul{
+  list-style: none;
+}
+ul li{
+  padding: 3px;
+  font-weight: bold;
+}
+span{
+  font-weight: normal;
+}
+li:before{
+  content: "\1F34C"
+}
+
+.ad{
+  max-width: 700px;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.check {
+  padding-left: 2rem !important;
+  margin-bottom: .5rem;
+}
+
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
+}
+
+.homelink{
+  color: #343a40!important;
+}
+
+.err{
+  color: firebrick;
+  font-weight: bold;
+}
+
+.msg{
+  color: forestgreen;
+  font-weight: bold;
+}
+
+.dat {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+
+@media (max-width: 576px) {
+  .dat {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  
+  .res{
+    max-width: 100% !important;
+  }
+
+  ul{
+    padding: 0;
+  }
+}
+
+#tagAddInput{
+  width: 88%
+}
+
+#tagAddButton{
+  width: 12%
+}
+
+.as{
+  display: flex
+}
+
+.tag{
+  padding: .2rem;
+  margin: .2rem;
+  color: royalblue;
+}
+
+#tagArea{
+  display: flex;
+  max-width: 700px;
+}

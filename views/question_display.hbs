@@ -1,0 +1,35 @@
+<div class="container">
+    <h1>Question</h1>
+    <ul>
+        <div class="row">
+            <div class="col-12">
+                <h4>{{qs.question}}</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h6>{{qs.answer}}</h6>
+            </div>
+        </div>
+        <hr>
+        <div class="row dat">
+            <div class="col-4 res">
+                Quiz Date: {{formatDate qs.date}}
+            </div>
+            {{#if qs.correct}}
+                <div class="col-4 res">Correct? &#x2705;</div>
+            {{else}}
+                <div class="col-4 res">Correct? &#x274C;</div>
+            {{/if}}
+            <div class="col-4 res">
+                Round# {{qs.round}}
+            </div>
+        </div>
+        <hr>
+        <div class="row dat">
+            <div class="col-4 res">Created By: {{qs.created_by}}</div>
+            <div class="col-4 res">On: {{formatDate qs.date_created}}</div>
+            <div class="col-4 res">Last Modified: {{formatDate qs.last_modified_by}}</div>
+        </div>
+    </ul>
+</div>
