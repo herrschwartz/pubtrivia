@@ -22,6 +22,12 @@ Handlebars.registerHelper('formatDate', function(dateString) {
   );
 });
 
+Handlebars.registerHelper('formatDateTime', function(dateString) {
+  return new Handlebars.SafeString(
+      moment(dateString).format("lll")
+  );
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
