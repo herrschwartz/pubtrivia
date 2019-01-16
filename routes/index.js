@@ -5,7 +5,7 @@ var moment = require('moment');
 var config = require('../config/dbconfig')
 
 
-sql.connect(config, function (err) {
+sql.connect(config.db, function (err) {
   if (err) console.log(err);
 });
 
@@ -20,10 +20,14 @@ router.get('/', function (req, res) {
 router.get('/question/get/:qid', function(req, res, next){
   let qid = req.params.qid
   var request = new sql.Request();
-  request.query(`select * from dbo.questions where id=${qid}`, function (err, recordset) {
+  request.query(`select * from dbo.questions q left join dbo.[user] on q.created_by = [user].id where q.id=${qid}; 
+                select [name] from dbo.tags join dbo.question_tags ON tag_id = id and question_id = ${qid}`, 
+    function (err, recordset) {
     if (err) console.log(err)
-    console.log(recordset.recordset[0])
-    res.render('question_display', {'qs': recordset.recordset[0]});
+
+    //console.log(recordset)
+    console.log(recordset.recordsets[1])
+    res.render('question_display', {'qs': recordset.recordset[0], 'tag': recordset.recordsets[1]}) ;
   });
 })
 
@@ -37,10 +41,10 @@ router.post('/question/add/', function(req, res, next){
   const date = moment(req.body.date).format("YYYY/MM/DD");
   const round = req.body.round;
   let correct = 0;
-  let now = moment(Date.now()).format("YYYY-MM-DD HH:MM:SS")
+  let now = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss a")
   if(req.body.correct == "correct") correct = 1;
 
-  let tgs = req.body.tagdata.split(",");
+  let tgs = req.body.tagdata.substring(0, tagdata.length-1).split(",");
   let inserts = tgs.map(x => `INSERT INTO dbo.tags (name, date_created, created_by) SELECT '${x.trim()}', '${now}', 1 where not exists (SELECT * FROM dbo.tags WHERE [name] = '${x.trim()}');`)
   let lookups = tgs.map(x => `'${x.trim()}',`).join(" ")
   lookups = lookups.substring(0, lookups.length - 1);

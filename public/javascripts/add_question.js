@@ -21,9 +21,9 @@ function addTag(e){
     if(regex.test(tag)){
         if(tag.charAt(0) == '#'){
             $("#tagArea").append("<div class='tag'>"+tag+"</div>")
-            document.getElementById("tagdata").value.toLowerCase() += tag.substring(1, tag.length) + ","
+            document.getElementById("tagdata").value += tag.substring(1, tag.length).toLowerCase() + ","
         } else {
-            document.getElementById("tagdata").value.toLowerCase() += tag + ","
+            document.getElementById("tagdata").value += tag.toLowerCase() + ","
             $("#tagArea").append("<div class='tag'>#"+tag+"</div>")
         }
     } else {

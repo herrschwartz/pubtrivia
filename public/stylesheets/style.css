@@ -101,3 +101,15 @@ li:before{
   display: flex;
   max-width: 700px;
 }
+.vert{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+
+  color: #5a5a5a;
+  font-size: 0.9rem;
+}
