@@ -10,7 +10,6 @@ window.onload = () => {
     document.getElementById("tagAddInput").onkeyup = (e) => {if(e.keyCode == 13) addTag(e)}
     document.getElementById("tagAddButton").click = (e) => {    
         let txt = document.getElementById("tagAddInput")
-        console.log(txt)
         $("#tagArea").append("<div class='tag'>"+ txt.value +"</div>")
         txt.value = ""
     }
@@ -19,13 +18,12 @@ window.onload = () => {
 function addTag(e){
     let tag = e.target.value.replace(/\s+/g, '')
     var regex = /^[a-zA-Z0-9 ]+$/
-    console.log(regex.test(tag))
     if(regex.test(tag)){
         if(tag.charAt(0) == '#'){
             $("#tagArea").append("<div class='tag'>"+tag+"</div>")
-            document.getElementById("tagdata").value += tag.substring(1, tag.length) + ","
+            document.getElementById("tagdata").value.toLowerCase() += tag.substring(1, tag.length) + ","
         } else {
-            document.getElementById("tagdata").value += tag + ","
+            document.getElementById("tagdata").value.toLowerCase() += tag + ","
             $("#tagArea").append("<div class='tag'>#"+tag+"</div>")
         }
     } else {
