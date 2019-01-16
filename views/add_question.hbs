@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Add Question</h1>
     <div class="msg">{{msg}}</div>
-    <div class="err">{{err}}</div>
+    <div class="err" id="err">{{err}}</div>
     <form action="/question/add/ad" method="POST">
         <input type="text" name="question" placeholder="question" class="form-control ad">
         <input type="text" name="answer" placeholder="answer" class="form-control ad">
@@ -14,6 +14,7 @@
             <input type="text" class="form-control" id="tagAddInput" placeholder="Tags"><button type="button" id="tagAddButton" class="btn btn-primary">add tag</button>
         </div>
         <div class="ad" id="tagArea"></div>
+        <input type="hidden" name="tagdata" id="tagdata">
         <button type="submit" class="btn btn-success">Add</button>
     </form>
 </div>

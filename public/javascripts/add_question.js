@@ -17,6 +17,19 @@ window.onload = () => {
 }
 
 function addTag(e){
-    $("#tagArea").append("<div class='tag'>"+e.target.value+"</div>")
+    let tag = e.target.value.replace(/\s+/g, '')
+    var regex = /^[a-zA-Z0-9 ]+$/
+    console.log(regex.test(tag))
+    if(regex.test(tag)){
+        if(tag.charAt(0) == '#'){
+            $("#tagArea").append("<div class='tag'>"+tag+"</div>")
+            document.getElementById("tagdata").value += tag.substring(1, tag.length) + ","
+        } else {
+            document.getElementById("tagdata").value += tag + ","
+            $("#tagArea").append("<div class='tag'>#"+tag+"</div>")
+        }
+    } else {
+        document.getElementById("err").innerHTML = "Error: Values must be a-z 0-9"
+    }
     e.target.value = ""
 }
