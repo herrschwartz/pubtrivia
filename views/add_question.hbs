@@ -1,7 +1,7 @@
 <div class="container">
     <h1>Add Question</h1>
     <div class="msg">{{msg}}</div>
-    <div class="err">{{err}}</div>
+    <div class="err" id="err">{{err}}</div>
     <form action="/question/add/" method="POST">
         <input type="text" name="question" placeholder="question" class="form-control ad">
         <input type="text" name="answer" placeholder="answer" class="form-control ad">
