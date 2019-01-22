@@ -24,6 +24,7 @@ router.post('/register', (req, res, next) => {
   let now = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss a")
 
   if(password !== password2){
+    req.flash('error', 'Passwords do not match')
     res.render('register', {err: "Passwords do not Match"}) 
   }
 
