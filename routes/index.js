@@ -33,25 +33,27 @@ router.get('/question/get/:qid', function(req, res, next){
   });
 })
 
-router.get('/question/add', function(req, res, next){
+router.get('/question/add', ensureAuthenticated, function(req, res, next){
   res.render('add_question', {})
 })
 
-router.post('/question/add/', function(req, response, next){
+router.post('/question/add/', ensureAuthenticated, function(req, response, next){
   const question = req.body.question.replace("'","''");
   const answer = req.body.answer.replace("'","''");
   const date = moment(req.body.date).format("YYYY/MM/DD");
   const round = req.body.round;
+  const user = req.user.id;
   let correct = 0;
   let now = moment(Date.now()).format("YYYY-MM-DD hh:mm:ss a")
   if(req.body.correct == "correct") correct = 1;
 
+  console.log(req.user);
   let tgs = req.body.tagdata.substring(0, req.body.tagdata.length-1).split(",");
-  let inserts = tgs.map(x => `INSERT INTO dbo.tags (name, date_created, created_by) SELECT '${x.trim()}', '${now}', 1 where not exists (SELECT * FROM dbo.tags WHERE [name] = '${x.trim()}');`)
+  let inserts = tgs.map(x => `INSERT INTO dbo.tags (name, date_created, created_by) SELECT '${x.trim()}', '${now}', ${user} where not exists (SELECT * FROM dbo.tags WHERE [name] = '${x.trim()}');`)
   let lookups = tgs.map(x => `'${x.trim()}',`).join(" ")
   lookups = lookups.substring(0, lookups.length - 1);
   let qinsert = `INSERT INTO dbo.questions (question, answer, correct, date, date_created, created_by, last_modified_by, round, date_last_modified) OUTPUT Inserted.ID
-  VALUES ('${question}', '${answer}', ${correct}, '${date}', '${now}', 1, 1, ${round}, '${now}')`
+  VALUES ('${question}', '${answer}', ${correct}, '${date}', '${now}', ${user}, ${user}, ${round}, '${now}')`
   console.log(qinsert)
 
   var con = new sql.Request();
@@ -59,7 +61,7 @@ router.post('/question/add/', function(req, response, next){
     if(err) {
       console.log(err)
       response.render('add_question', {'err': err, 'msg': "let Tim know question insert fucked up"})
-    }
+    } 
 
     var qid = res.recordset[0].ID
     con.query(inserts.join(" "), (err, res, fields)=>{
@@ -80,6 +82,14 @@ router.post('/question/add/', function(req, response, next){
   })
   response.redirect("/question/add")
 })
+
+function ensureAuthenticated(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  } else {
+    res.redirect('/users/login')
+  }
+}
 
 
 module.exports = router;

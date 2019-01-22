@@ -1,0 +1,11 @@
+<div class="container">
+    <h1>Login</h1>
+    <div class="msg">{{msg}}</div>
+    <div class="err" id="err">{{err.message}}</div>
+    <form action="/users/login" method="POST">
+        <input type="text" name="username" placeholder="username" class="form-control ad">
+        <input type="password" name="password" class="form-control ad" id="pass" placeholder="password">
+        <button type="submit" class="btn btn-success">Login</button>
+    </form>
+    <a href="/users/register">Sign Up</a>
+</div>

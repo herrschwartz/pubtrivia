@@ -3,14 +3,48 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+const bodyParser = require('body-parser');
 
+const flash = require('connect-flash');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var Handlebars = require('hbs');
 var moment = require('moment');
+const passport = require('passport');
 
 var app = express();
+
+// Body Parser Middleware
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
+
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+//passport config
+require('./config/passport')(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +61,7 @@ Handlebars.registerHelper('formatDateTime', function(dateString) {
       moment(dateString).format("lll")
   );
 });
+
 
 app.use(logger('dev'));
 app.use(express.json());
