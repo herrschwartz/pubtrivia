@@ -23,7 +23,7 @@ router.get('/question/get/:qid', function(req, res, next){
   request.query(`select q.question, q.answer, q.[date], q.correct,  q.[round], q.date_created, q.date_last_modified, cr.[name] as [created_by], lm.[name] as [mod_by]
                  from triviasql.dbo.questions q left join dbo.[user] cr on q.created_by = cr.id
                  left join dbo.[user] lm on q.last_modified_by = lm.id where q.id=${qid}; 
-           select [name] from dbo.tags join dbo.question_tags ON tag_id = id and question_id = ${qid}`, 
+           select [name], id from dbo.tags join dbo.question_tags ON tag_id = id and question_id = ${qid}`, 
     function (err, recordset) {
     if (err) console.log(err)
 

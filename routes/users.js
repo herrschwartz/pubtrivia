@@ -35,12 +35,9 @@ router.post('/register', (req, res, next) => {
       var request = new sql.Request();
       request.query(`insert into dbo.[User](username, password, name, email, date_created) 
                      VALUES('${username}', '${hash}', '${name}', '${email}', '${now}')`, function (err, recordset) {
-        if (err) {
-          console.log(err)
-          res.render("register", {err: "Username already exists"})
-        } else {
-          res.redirect('/');
-        }
+        if (err) console.log(err)
+
+          res.redirect('/users/login');
       });
     })
   })

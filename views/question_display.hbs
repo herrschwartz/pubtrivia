@@ -29,7 +29,7 @@
         <div class="row dat">
             <div class="ad" id="tagArea">
                 {{#each tag}}
-                    <div class='tag'>#{{this.name}}</div>
+                    <div class='tag'><a href="/tags/get/{{this.id}}">#{{this.name}}</a></div>
                 {{/each}}
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="col-4 res">Created By: {{qs.created_by}}</div>
             <div class="col-4 res">On: {{formatDateTime qs.date_created}}</div>
             <div class="col-4 res">Last Modified By: {{qs.mod_by}}</div>
-            <div class="col-4 res">On: {{formatDateTime qs.last_modified_by}}</div>
+            <div class="col-4 res">On: {{formatDateTime qs.date_last_modified}}</div>
         </div>
     </ul>
 </div>

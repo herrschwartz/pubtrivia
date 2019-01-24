@@ -1,0 +1,15 @@
+<div class="container">
+    <h1>Tags</h1>
+    <ul>
+        {{#each qs}}
+        <div class="row">
+            <div class="col-6">
+                <li class="tagli"><a href="/tags/get/{{this.id}}">{{this.name}}</a></li>
+            </div>
+            <div class="col-3">
+                <span>{{this.qcount}}</span>
+            </div>
+        </div>
+        {{/each}}
+    </ul>
+</div>

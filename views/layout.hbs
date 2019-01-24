@@ -11,6 +11,7 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
       <h5 class="my-0 mr-md-auto font-weight-normal"><a href="/" class="homelink">Drive Fast <small>eat ass</small></a></h5>
       <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="/tags">Tags</a>
         <a class="p-2 text-dark" href="/question/add">Add Question</a>
       </nav>
       {{#if user}}
@@ -20,30 +21,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <div>{{error.message}}</div>
-    {{#if sessionFlash.message}}
-      <div id="flash-messages" class="container">
-          {{#contains sessionFlash.type "info"}}
-          <div class="alert alert-info">
-                {{{sessionFlash.message}}}
-          </div>
-          {{/contains}}
-          {{#contains sessionFlash.type "success"}}
-          <div class="alert alert-success">
-                  {{{sessionFlash.message}}}
-          </div>
-          {{/contains}}
-          {{#contains sessionFlash.type "warning"}}
-          <div class="alert alert-warning">
-                {{{sessionFlash.message}}}
-          </div>
-          {{/contains}}
-          {{#contains sessionFlash.type "error"}}
-          <div class="alert alert-danger">
-                {{{sessionFlash.message}}}
-          </div>
-          {{/contains}}
-      </div>
-    {{/if}}
     {{{body}}}
   </body>
 </html>

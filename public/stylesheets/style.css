@@ -2,7 +2,10 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
+nav a {
+  color: #343a40!important;
+}
+li a{
   color: #343a40!important;
 }
 
@@ -18,6 +21,9 @@ span{
 }
 li:before{
   content: "\1F34C"
+}
+.tagli:before{
+  content: "\1F31D"
 }
 
 .ad{
